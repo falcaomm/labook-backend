@@ -1,3 +1,15 @@
+export interface LikeDB {
+    user_id: string,
+    post_id: string,
+    like: number
+}
+
+export interface LikeModel {
+    userId: string,
+    postId: string,
+    like: number
+}
+
 export class Like {
     constructor(
         private userId: string,

@@ -7,7 +7,7 @@ CREATE TABLE
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         role TEXT NOT NULL,
-        created_at TEXT NOT NULL
+        created_at TEXT DEFAULT (DATETIME()) NOT NULL
     );
 
 CREATE TABLE
@@ -17,7 +17,7 @@ CREATE TABLE
         content TEXT NOT NULL,
         likes INTEGER NOT NULL,
         dislikes INTEGER NOT NULL,
-        created_at TEXT NOT NULL,
+        created_at TEXT DEFAULT (DATETIME()) NOT NULL,
         updated_at TEXT NOT NULL
     );
 
@@ -27,3 +27,10 @@ CREATE TABLE
         post_id TEXT NOT NULL REFERENCES posts(id),
         like INTEGER NOT NULL
     );
+
+
+DROP TABLE users;
+
+DROP TABLE posts;
+
+DROP TABLE likes_dislikes;
