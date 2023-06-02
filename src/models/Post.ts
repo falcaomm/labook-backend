@@ -10,18 +10,22 @@ export interface PostDB {
 
 export interface PostModel {
     id: string,
-    creatorId: string,
     content: string,
     likes: number,
     dislikes: number,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    creator: {
+        id: string,
+        name: string
+    }
 }
 
 export class Post {
     constructor(
         private id: string,
         private creatorId: string,
+        private creatorName: string,
         private content: string,
         private likes: number,
         private dislikes: number,
@@ -43,6 +47,14 @@ export class Post {
 
     public setCreatorId(value: string): void {
         this.creatorId = value
+    }
+
+    public getCreatorName(): string {
+        return this.creatorName
+    }
+
+    public setCreatorName(value: string): void {
+        this.creatorName= value
     }
 
     public getContent(): string {
@@ -83,5 +95,32 @@ export class Post {
 
     public setUpdatedAt(value: string): void {
         this.updatedAt = value
+    }
+
+    public toDBModel(): PostDB {
+        return {
+            id: this.id,
+            creator_id: this.creatorId,
+            content: this.content,
+            likes: this.likes,
+            dislikes: this.dislikes,
+            created_at: this.createdAt,
+            updated_at: this.updatedAt
+        }
+    }
+
+    public toBusinessModel(): PostModel {
+        return {
+            id: this.id,
+            content: this.content,
+            likes: this.likes,
+            dislikes: this.dislikes,
+            createdAt: this.createdAt,
+            updatedAt: this.updatedAt,
+            creator: {
+                id: this.creatorId,
+                name: this.creatorName
+            }
+        }
     }
 }
